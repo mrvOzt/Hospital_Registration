@@ -1,0 +1,58 @@
+﻿<section class="section">
+    <div class="row">
+        <div style="padding:150px;" class="col-lg-12">
+
+            <div class="card">
+                <div style="background-color: #f1f7fd;" class="card-body">
+                    <h5 class="card-title">All Patients</h5>
+                   
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Id Number</th>
+                                <th scope="col">Name - Surname</th>
+                                <th scope="col">Birth Date</th>
+                                <th scope="col">Visit</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                foreach (var patient in (List<Semafor_Hospital_Registrastion_System.Models.Patient>)ViewBag.patients)
+                                {
+
+
+                                        <tr>
+                                            <th scope="row">@patient.id</th>
+                                            <td>@patient.id_no</td>
+                                            <td>@patient.name_surname</td>
+                                            <td>@patient.birth_date.ToShortDateString()</td>
+                                            <td>
+                                                <a asp-controller="Patient" asp-action="DetailPatient" asp-route-id=@patient.id class="btn btn-primary">Details</a>
+
+                                            </td>
+
+                                        </tr>
+
+
+
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+

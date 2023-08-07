@@ -1,0 +1,101 @@
+﻿@model Visit
+
+<section id="appointment" class="appointment section-bg">
+    <div style="padding:150px;" class="container">
+
+        <div class="section-title">
+            <h2>Visit Details</h2>
+        </div>
+
+        <form>
+            <input asp-for="visit_id" type="hidden" />
+
+            <div class="form-group">
+                <label asp-for="patient_id" class="control-label">Patient Id</label>
+                <input asp-for="patient_id" class="form-control" readonly />
+                <span asp-validation-for="patient_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="visit_date" class="control-label">Visit Date</label>
+                <input asp-for="visit_date" class="form-control" readonly />
+                <span asp-validation-for="visit_date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="doctor_name" class="control-label">Doctor Name</label>
+                <input asp-for="doctor_name" class="form-control" readonly />
+                <span asp-validation-for="doctor_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="complaint" class="control-label">Complient</label>
+                <input asp-for="complaint" class="form-control" readonly />
+                <span asp-validation-for="complaint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="form_of_treatment" class="control-label">Form Of Treatment</label>
+                <input asp-for="form_of_treatment" class="form-control" readonly />
+                <span asp-validation-for="form_of_treatment" class="text-danger"></span>
+            </div>
+            <br />
+            <br />
+                @if (ViewBag.loginUser == "admin")
+                {
+                    <div id="details_buttons" style="display: flex; justify-content: center;">
+                        <button asp-route-visit=@Model asp-controller="Visit" asp-action="UpdateVisit" class="btn btn-primary" style="margin-right: 10px;">Update Visit</button>
+                        <button id="deleteButton" class="btn btn-danger">Delete Visit</button>
+                    </div>
+                    <div id="overlay" class="overlay" style="justify-content:center; display: none;">
+                        <div class="alert-box">
+                            <p>Are you sure you want to delete this visit?</p>
+                            <div style="justify-content: center;">
+                                <button style="margin-right:10px;" asp-route-visit=@Model asp-controller="Visit" asp-action="DeleteVisit" id="confirmButton" class="btn btn-primary">Yes</button>
+                                <button id="cancelButton" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+         </form>
+        
+    </div>
+</section>
+<script>
+
+    document.getElementById('deleteButton').addEventListener('click', function (event) {
+        event.preventDefault(); // Sayfanın yenilenmesini engelle
+        showAlertBox();
+    });
+    function showOverlay() {
+        document.getElementById('overlay').style.display = 'flex';
+        document.getElementById('details_buttons').style.display = 'none';
+
+    }
+
+    // Overlay'ı gizlemek için
+    function hideOverlay() {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('details_buttons').style.display = 'flex';
+
+    }
+
+    // Uyarı kutusunu göstermek için
+    function showAlertBox() {
+        showOverlay();
+    }
+    document.getElementById('deleteButton').addEventListener('click', function () {
+        showAlertBox();
+    });
+
+    // Evet düğmesine tıklandığında yapılacak işlem
+    document.getElementById('confirmButton').addEventListener('click', function () {
+        // Silme işlemini gerçekleştirin
+        // ...
+
+        hideOverlay();
+       
+    });
+
+    // İptal düğmesine tıklandığında yapılacak işlem
+    document.getElementById('cancelButton').addEventListener('click', function () {
+        event.preventDefault(); // Sayfanın yenilenmesini engelle
+        hideOverlay();
+    });
+</script>

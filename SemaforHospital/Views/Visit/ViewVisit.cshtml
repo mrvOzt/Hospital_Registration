@@ -1,0 +1,59 @@
+﻿<section class="section">
+    <div class="row">
+        <div style="padding:150px;" class="col-lg-12">
+
+            <div class="card">
+                <div style="background-color: #f1f7fd;" class="card-body">
+                    <h5 class="card-title">All Visits</h5>
+
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Patient Id</th>
+                                <th scope="col">Visit Date</th>
+                                <th scope="col">Doctor Name</th>
+                                <th scope="col">Details</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                foreach (var visit in (List<Semafor_Hospital_Registrastion_System.Models.Visit>)ViewBag.visits)
+                                {
+
+
+                                                        <tr>
+                                                            <th scope="row">@visit.visit_id</th>
+                                                            <th>@visit.patient_id</th>
+                                                            <td>@visit.visit_date</td>
+                                                            <td>@visit.doctor_name</td>
+                                                            <td>
+                                                                <a  asp-controller="Visit" asp-action="SelectVisit" asp-route-selectedVisitId=@visit.visit_id class="btn btn-primary">Details</a>
+
+                                                            </td>
+                                                            
+                                                        </tr>
+
+
+
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+

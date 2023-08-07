@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Semafor_Hospital.props" />
+</Project>
